@@ -13,6 +13,8 @@ public class Ocean : MonoBehaviour
 
     public Projection projection;
 
+    public MirrorPlane mirrorPlane;
+
     void Awake()
 	{
         Water = gameObject;
@@ -24,11 +26,16 @@ public class Ocean : MonoBehaviour
         WaterRenderer.material = Resources.Load("Materials/Ocean", typeof(Material)) as Material;
 
         projection = new Projection();
+
+        mirrorPlane = new MirrorPlane();
     }
 
     void Start()
     {
-
+        if(mirrorPlane != null)
+        {
+            mirrorPlane.Init();
+        }
     }
 
     private void Update()
@@ -37,6 +44,7 @@ public class Ocean : MonoBehaviour
         projection.UpdateProjection(cam);
         
         Shader.SetGlobalMatrix("Interpolation", projection.projectorI);
+        Shader.SetGlobalTexture("ReflectTex", mirrorPlane.ReflectTex);
     }
 
     public Mesh CreateMesh(int width, int height, int titleWidth, int titleHeight)
@@ -87,5 +95,13 @@ public class Ocean : MonoBehaviour
         mesh.RecalculateBounds();
 
         return mesh;
+    }
+
+    void OnWillRenderObject()
+    {
+        if (mirrorPlane != null)
+        {
+            mirrorPlane.UpdateRenderTarget(Camera.main);
+        }
     }
 }

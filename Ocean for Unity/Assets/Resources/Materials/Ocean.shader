@@ -2,7 +2,7 @@
 {
 	Properties
 	{
-		_MainTex ("Texture", 2D) = "white" {}
+		//_MainTex ("Texture", 2D) = "white" {}
 	}
 	SubShader
 	{
@@ -27,13 +27,11 @@
 
 			struct v2f
 			{
-				float2 uv : TEXCOORD0;
-				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
+				float4 screenUV : TEXCOORD1;
 			};
 
-			sampler2D _MainTex;
-			float4 _MainTex_ST;
+			sampler2D ReflectTex;
 
 			float4x4 Interpolation;
 
@@ -46,20 +44,19 @@
 				p.y = 0.0f;
 
 				o.vertex = UnityObjectToClipPos(p);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				UNITY_TRANSFER_FOG(o,o.vertex);
+				float4 screenPos = UnityObjectToClipPos(p);
+				o.screenUV = ComputeScreenPos(screenPos);
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				// sample the texture
-				fixed4 col = tex2D(_MainTex, i.uv);
-				// apply fog
-				UNITY_APPLY_FOG(i.fogCoord, col);
+				float2 uv = i.screenUV.xy / i.screenUV.w;
+				uv.x = 1 - uv.x;
+				float4 reflectColor = tex2D(ReflectTex, uv.xy);
 
-				col = float4(0.5, 0.5, 1, 1);
-				return col;
+				float4 finalColor = float4(reflectColor.xyz, 1.0);
+				return finalColor;
 			}
 			ENDCG
 		}
