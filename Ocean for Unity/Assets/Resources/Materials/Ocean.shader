@@ -32,6 +32,7 @@
 			};
 
 			sampler2D ReflectTex;
+			sampler2D RefractTex;
 
 			float4x4 Interpolation;
 
@@ -52,10 +53,12 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float2 uv = i.screenUV.xy / i.screenUV.w;
-				uv.x = 1 - uv.x;
-				float4 reflectColor = tex2D(ReflectTex, uv.xy);
+				float4 reflectColor = tex2D(ReflectTex, float2(1 - uv.x, uv.y));
+				float4 refractColor = tex2D(RefractTex, float2(0 + uv.x, uv.y));
 
-				float4 finalColor = float4(reflectColor.xyz, 1.0);
+				float3 blerpColor = reflectColor*0.75 + refractColor*0.25;
+
+				float4 finalColor = float4(blerpColor.xyz, 1.0);
 				return finalColor;
 			}
 			ENDCG

@@ -45,6 +45,7 @@ public class Ocean : MonoBehaviour
         
         Shader.SetGlobalMatrix("Interpolation", projection.projectorI);
         Shader.SetGlobalTexture("ReflectTex", mirrorPlane.ReflectTex);
+        Shader.SetGlobalTexture("RefractTex", mirrorPlane.RefractTex);
     }
 
     public Mesh CreateMesh(int width, int height, int titleWidth, int titleHeight)
