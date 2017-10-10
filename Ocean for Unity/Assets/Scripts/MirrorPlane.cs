@@ -104,7 +104,6 @@ public class MirrorPlane
 
         // 折射
         {
-           
             Vector3 pos = planePos;
             Vector3 normal = -planeNormal; //单位化，方便算矩阵  
             float D = -Vector3.Dot(normal, pos);
