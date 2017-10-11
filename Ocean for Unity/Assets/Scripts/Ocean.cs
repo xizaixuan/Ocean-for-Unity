@@ -38,7 +38,7 @@ public class Ocean : MonoBehaviour
         }
     }
 
-    private void Update()
+    void LateUpdate()
     {
         Camera cam = Camera.main;
         projection.UpdateProjection(cam);

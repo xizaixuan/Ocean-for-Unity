@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
         m_previousPos = m_dummy.transform.position;
     }
 
-    void LateUpdate()
+    void Update()
     {
         ProcessInput();
 
