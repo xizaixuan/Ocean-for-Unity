@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 public class Ocean : MonoBehaviour
 {
-
     public MeshFilter WaterFilters { set; get; }
     public Renderer WaterRenderer { set; get; }
     public GameObject Water { set; get; }
@@ -14,6 +13,12 @@ public class Ocean : MonoBehaviour
     public Projection projection;
 
     public MirrorPlane mirrorPlane;
+
+    public Texture DisplacementTex;
+
+    private Vector2 DisplacementTex_Offset;
+    public Vector2 DisplacementTex_Speed;
+    public float Displacement;
 
     void Awake()
 	{
@@ -42,10 +47,15 @@ public class Ocean : MonoBehaviour
     {
         Camera cam = Camera.main;
         projection.UpdateProjection(cam);
-        
+
+        DisplacementTex_Offset += DisplacementTex_Speed * Time.deltaTime;
+
         Shader.SetGlobalMatrix("Interpolation", projection.projectorI);
         Shader.SetGlobalTexture("ReflectTex", mirrorPlane.ReflectTex);
         Shader.SetGlobalTexture("RefractTex", mirrorPlane.RefractTex);
+        Shader.SetGlobalTexture("DisplacementTex", DisplacementTex);
+        Shader.SetGlobalVector("DisplacementTex_Offset", DisplacementTex_Offset);
+        Shader.SetGlobalFloat("Displacement", Displacement);
     }
 
     public Mesh CreateMesh(int width, int height, int titleWidth, int titleHeight)

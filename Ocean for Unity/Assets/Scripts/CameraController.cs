@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        m_dummy = new GameObject();
+        m_dummy = new GameObject("Dummy_Cam");
 
         m_position.camRotation.x = m_camStartRotationX;
         m_position.camRotation.y = m_camStartRotationY;

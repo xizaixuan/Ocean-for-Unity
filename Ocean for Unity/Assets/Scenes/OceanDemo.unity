@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e8d09df02866a4ab763b35d1682791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisplacementTex: {fileID: 2800000, guid: cb3f7cfe5c4cc2c4e8c30b71bdcc5a58, type: 3}
+  DisplacementTex_Speed: {x: 0.03, y: 0.03}
+  Displacement: 10
 --- !u!1 &471300900
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,12 +417,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_forward: {x: 0, y: 0, z: 1}
-  MoveSpeed: 20
+  MoveSpeed: 10
   Smoothness: 0.5
-  m_camRotationSpeed: 10
+  m_camRotationSpeed: 5
   m_camStartRotationX: 180
   m_camStartRotationY: 60
-  m_camStartDistance: 100
+  m_camStartDistance: 50
   camSmoothness: 0.5
 --- !u!1 &1459596208
 GameObject:
