@@ -148,9 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e8d09df02866a4ab763b35d1682791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplacementTex: {fileID: 2800000, guid: cb3f7cfe5c4cc2c4e8c30b71bdcc5a58, type: 3}
-  DisplacementTex_Speed: {x: 0.03, y: 0.03}
+  DisplacementTex: {fileID: 2800000, guid: 6b29a521562c30a44a97d5bfff29b6a4, type: 3}
+  WaveDMapOffsetSpeed: {x: 0.12, y: 0.15}
   Displacement: 10
+  NormalTex: {fileID: 2800000, guid: daeff0dac0a3d494c859bed6e361690b, type: 3}
 --- !u!1 &471300900
 GameObject:
   m_ObjectHideFlags: 0
