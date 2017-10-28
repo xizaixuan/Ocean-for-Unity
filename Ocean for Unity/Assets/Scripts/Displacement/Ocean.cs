@@ -30,22 +30,7 @@ public class Ocean : MonoBehaviour
 
         WaterFilters.mesh = CreateMesh(128, 128);
 
-        WaterRenderer.material = Resources.Load("Materials/Ocean", typeof(Material)) as Material;
-
-/*
-        bool test = SystemInfo.SupportsTextureFormat(TextureFormat.RFloat);
-
-        byte[] test11 = DisplacementTex.GetRawTextureData();
-        Color[] test22 = DisplacementTex.GetPixels();
-
-        float[] results = new float[test22.Length * 4];
-        for (int i = 0; i < test22.Length; i++)
-        {
-            results[i * 4] = test22[i].r;
-            results[i * 4 + 1] = test22[i].g;
-            results[i * 4 + 2] = test22[i].b;
-            results[i * 4 + 3] = test22[i].a;
-        }*/
+        WaterRenderer.material = Resources.Load("Displacement/Materials/Ocean", typeof(Material)) as Material;
 
         projection = new Projection();
 
